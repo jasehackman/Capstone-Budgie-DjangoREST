@@ -12,7 +12,7 @@ class Budget(models.Model):
         categories = self.category_set.all()
         spent = 0
         for category in categories:
-            spent += category
+            spent += category.amount
         return spent
 
     @property

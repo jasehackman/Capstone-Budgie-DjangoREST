@@ -4,7 +4,7 @@ from budgy import views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'bugets', views.BudgetViewSet)
+router.register(r'budgets', views.BudgetViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'categories', views.CategoryViewSet)
 router.register(r'expenses', views.ExpenseViewSet)
