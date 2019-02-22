@@ -24,8 +24,9 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('name', 'amount', 'budget', 'spent', 'remaining', 'id', 'budget_id')
 
 class ExpenseSerializer(serializers.HyperlinkedModelSerializer):
+    category_id=serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source='category')
 
     class Meta:
         model = Expense
-        fields = "__all__"
+        fields = ('name', 'amount', 'date', 'notes', 'category_id', 'id')
 

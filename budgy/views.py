@@ -6,7 +6,7 @@ from rest_framework import generics
 # from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 class BudgetViewSet(viewsets.ModelViewSet):
@@ -25,6 +25,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
+
+    filterset_fields = ( 'category_id', 'name')
+
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
