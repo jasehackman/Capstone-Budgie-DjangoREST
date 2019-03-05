@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'budgy.apps.BudgyConfig',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,10 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     '127.0.0.1:3000'
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend','rest_framework.filters.SearchFilter'
+        ),
+
+}
