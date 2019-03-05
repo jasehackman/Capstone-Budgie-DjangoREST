@@ -14,14 +14,14 @@ class BudgetSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Budget
-        fields = ('name', 'amount', 'spent', 'remaining', 'id', 'user')
+        fields = ('name', 'amount', 'spent', 'remaining', 'id', 'user', 'percent')
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     # budget=BudgetSerializer(read_only=True)
     budget_id=serializers.PrimaryKeyRelatedField(queryset=Budget.objects.all(), source='budget')
     class Meta:
         model = Category
-        fields = ('name', 'amount', 'budget', 'spent', 'remaining', 'id', 'budget_id', "url")
+        fields = ('name', 'amount', 'budget', 'spent', 'remaining', 'id', 'budget_id', "url", 'percent')
 
 class ExpenseSerializer(serializers.HyperlinkedModelSerializer):
     category_id=serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source='category')

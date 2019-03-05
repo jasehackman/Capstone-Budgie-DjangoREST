@@ -20,6 +20,11 @@ class Budget(models.Model):
         remaining = self.amount - self.spent
         return remaining
 
+    @property
+    def percent(self):
+        percent = int((self.spent/self.amount)*100)
+        return percent
+
 class Category(models.Model):
     name = models.CharField(max_length=200)
     amount = amount = models.DecimalField(max_digits=9, decimal_places=2)
@@ -37,6 +42,11 @@ class Category(models.Model):
     def remaining(self):
         remaining = self.amount - self.spent
         return remaining
+
+    @property
+    def percent(self):
+        percent = int((self.spent/self.amount)*100)
+        return percent
 
 class Expense(models.Model):
     name = models.CharField(max_length=200)
