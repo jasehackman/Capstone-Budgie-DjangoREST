@@ -15,11 +15,20 @@ import json
 
 
 class BudgetViewSet(viewsets.ModelViewSet):
+
+    def get_queryset(self):
+        print("request", self.request.user)
+        return Budget.objects.filter(user=self.request.user)
+
+    permission_classes = (IsAuthenticated,)
+
     queryset = Budget.objects.all()
     serializer_class = BudgetSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
@@ -39,6 +48,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
     """
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
