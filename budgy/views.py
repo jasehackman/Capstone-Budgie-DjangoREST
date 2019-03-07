@@ -19,13 +19,25 @@ import json
 class BudgetViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
-        print("request", self.request.user)
-        return Budget.objects.filter(user=self.request.user)
+        print("request", self.request.GET.get('archived'))
+        archived = self.request.GET.get('archived')
+        query = Budget.objects.all()
+        if archived == 'true':
+            print("true")
+            query= Budget.objects.filter(user=self.request.user).filter(archived=True)
+        elif archived == 'false':
+            print("false")
+            query= Budget.objects.filter(user=self.request.user).filter(archived=False)
+        print("query", query)
+        return query
 
     permission_classes = (IsAuthenticated,)
 
     queryset = Budget.objects.all()
     serializer_class = BudgetSerializer
+
+
+
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
