@@ -15,5 +15,6 @@ router.register(r'expenses', views.ExpenseViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    path('register', views.register_user, name='register_user')
+    path('register', views.register_user, name='register_user'),
+    path('authenticate/', views.CustomObtainAuthToken.as_view())
 ]
