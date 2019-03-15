@@ -8,11 +8,19 @@ class Budget(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @property
-    def spent(self):
+    def allocated(self):
         categories = self.category_set.all()
         spent = 0
         for category in categories:
             spent += category.amount
+        return spent
+
+    @property
+    def spent(self):
+        categories = self.category_set.all()
+        spent = 0
+        for category in categories:
+            spent += category.spent
         return spent
 
     @property
