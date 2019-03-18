@@ -10,10 +10,15 @@ class Budget(models.Model):
     @property
     def allocated(self):
         categories = self.category_set.all()
-        spent = 0
+        allocated = 0
         for category in categories:
-            spent += category.amount
-        return spent
+            allocated += category.amount
+        return allocated
+
+    @property
+    def to_allocate(self):
+        to_allocate = self.amount - self.allocated
+        return to_allocate
 
     @property
     def spent(self):
