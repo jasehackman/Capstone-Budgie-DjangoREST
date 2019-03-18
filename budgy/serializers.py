@@ -14,7 +14,7 @@ class BudgetSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Budget
-        fields = ('name', 'amount', 'spent', 'remaining', 'id', 'user', 'percent', 'archived')
+        fields = ('name', 'amount', 'spent', 'remaining', 'id', 'user', 'percent', 'archived', 'allocated', 'to_allocate')
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     # budget=BudgetSerializer(read_only=True)
