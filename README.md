@@ -8,7 +8,7 @@ This API will give you access to resources related to Budgie. It is powered by D
 - Run `source env/bin/activate` to initialize a virtual environment (`deactivate` to exit environment)
 - Run `git clone git@github.com:jasehackman/Capstone-Budgie-DjangoREST.git`
 - Run `cd capstone`
-- Run `python manage.py makemigrations budgie`
+- Run `python manage.py makemigrations budgy`
 - Run `python manage.py migrate`
 - Initialize the project using the command line by typing `python manage.py runserver` in the main directory.
 - Access the application in a browser at `http://localhost:8000/`.
