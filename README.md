@@ -15,8 +15,6 @@ This API will give you access to resources related to Budgie. It is powered by D
 
 ## Using the API
 All calls to the API will be made from `http://localhost:8000/`
->EX you can access a list of all budgets by making a get call to `http://localhost:8000/budgets`
-CORS is enabled with `http://www.bangazon.com`
 
 ## Resources
 
