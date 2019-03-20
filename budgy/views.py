@@ -6,7 +6,6 @@ from rest_framework import generics
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-# from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 from django.views.decorators.csrf import csrf_exempt
@@ -17,6 +16,9 @@ import json
 
 
 class BudgetViewSet(viewsets.ModelViewSet):
+    """ Defines the views for budgets.
+    Query: 'archived=true or false - filters get request based on if a budget is archived
+    """
 
     def get_queryset(self):
         print("request", self.request.GET.get('archived'))
@@ -37,10 +39,9 @@ class BudgetViewSet(viewsets.ModelViewSet):
     serializer_class = BudgetSerializer
 
 
-
-
-
 class CategoryViewSet(viewsets.ModelViewSet):
+    """ Defines the views for categories.
+    """
     permission_classes = (IsAuthenticated,)
 
     queryset = Category.objects.all()
@@ -49,8 +50,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
     filterset_fields = ( 'budget_id', 'name')
 
 
-
 class ExpenseViewSet(viewsets.ModelViewSet):
+    """ Defines the views for expenses.
+    """
     permission_classes = (IsAuthenticated,)
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
@@ -59,9 +61,9 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Defines the views for expenses.
     """
-    This viewset automatically provides `list` and `detail` actions.
-    """
+
     permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -69,6 +71,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 @csrf_exempt
 def register_user(request):
+    """ Handles user registration. Does not require login to register."""
     req_body = json.loads(request.body.decode())
     new_user=User.objects.create_user(
         username=req_body['username'],
@@ -84,6 +87,8 @@ def register_user(request):
     return HttpResponse(data,content_type='application/json')
 
 class CustomObtainAuthToken(ObtainAuthToken):
+    """ Login. Returns a token that also includes the user_id.
+    """
     def post(self, request, *args, **kwargs):
         response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
