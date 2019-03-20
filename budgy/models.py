@@ -61,6 +61,9 @@ class Category(models.Model):
     amount = amount = models.DecimalField(max_digits=9, decimal_places=2)
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
     @property
     def spent(self):
         # Returns how much has been spent out of the category
@@ -88,13 +91,15 @@ class Expense(models.Model):
     Returns:
         str -- Expense Name
     """
+
     name = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
     date = models.DateField(default=None, null=True, blank=True)
     notes = models.TextField(default=None, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.name
 
 
 
